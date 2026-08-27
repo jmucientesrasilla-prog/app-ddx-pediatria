@@ -11,6 +11,21 @@ st.set_page_config(
     layout="centered"
 )
 
+# ==========================================
+# --- NUEVO: SISTEMA DE CONTRASEÑA ---
+# ==========================================
+st.markdown("### 🔒 Acceso Privado")
+clave_acceso = st.text_input("Introduce la contraseña para desbloquear la IA:", type="password")
+
+# Si la clave no coincide con la del Secreto, detenemos la app aquí
+if clave_acceso != st.secrets["PASSWORD_APP"]:
+    st.info("App bloqueada. Introduce la clave correcta.")
+    st.stop() # Esto oculta todo el resto de la aplicación
+
+st.success("¡Acceso concedido!")
+st.markdown("---")
+# ==========================================
+
 SYSTEM_INSTRUCTIONS = """
 Eres un experto Radiólogo Pediátrico adjunto de un hospital de tercer nivel.
 Tu objetivo es ayudar a otro radiólogo a generar una lista de diagnósticos diferenciales (DDx) precisos y estructurados a partir de los datos clínicos y radiológicos que te proporcione.
